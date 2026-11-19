@@ -1,0 +1,7 @@
+# Installed into the dedicated TTS environment after CPU PyTorch.
+coqui-tts==0.24.3
+transformers==4.48.3
+numpy>=1.24.3,<2
+soundfile==0.13.1
+click==8.1.8
+typer==0.9.0

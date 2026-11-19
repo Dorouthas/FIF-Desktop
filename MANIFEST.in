@@ -1,0 +1,12 @@
+include README.md LICENSE THIRD_PARTY.md CHANGELOG.md pyproject.toml uv.lock .gitignore .gitattributes .editorconfig
+include requirements*.txt *.cmd bootstrap.ps1
+recursive-include src/fif_oral *.py *.json *.txt *.svg *.html *.css *.js
+recursive-include docs *.md
+recursive-include scripts *.py *.md
+recursive-include tests *.py
+recursive-include .github *.yml *.md
+prune data
+prune .venv
+prune build
+prune dist
+global-exclude __pycache__ *.py[cod] *.log

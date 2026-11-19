@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "platform": "windows-amd64",
+  "uv": {
+    "version": "0.12.5",
+    "url": "https://github.com/astral-sh/uv/releases/download/0.12.5/uv-x86_64-pc-windows-msvc.zip",
+    "size": 20329591,
+    "sha256": "4c4d49d8738847d9b71ba319e49a5688c93eac0fe6204b1df24e98528dddf39a"
+  },
+  "ffmpeg": {
+    "version": "9.0.2",
+    "url": "https://github.com/GyanD/codexffmpeg/releases/download/9.0.2/ffmpeg-9.0.2-essentials_build.zip",
+    "sha256": "60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba",
+    "source": "https://ffmpeg.org/download.html#build-windows",
+    "mirrors": [
+      "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip"
+    ]
+  },
+  "models": {
+    "your_tts": {
+      "name": "YourTTS",
+      "version": "v0.10.1_models",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "url": "https://github.com/coqui-ai/TTS/releases/download/v0.10.1_models/tts_models--multilingual--multi-dataset--your_tts.zip",
+      "size": 425247518,
+      "files": [
+        {
+          "name": "config.json",
+          "size": 13328,
+          "sha256": "d49058aa0d3377e47dbd31aba3da8b9554a3a25b5a57e3634808a13d891bdd02"
+        },
+        {
+          "name": "model_file.pth",
+          "size": 379957289,
+          "sha256": "017bfd8907c80bb5857d65d0223f0e4e4b9d699ef52e2a853d9cc7eb7e308cf0"
+        },
+        {
+          "name": "model_se.pth",
+          "size": 44610930,
+          "sha256": "8f96efb20cbeeefd81fd8336d7f0155bf8902f82f9474e58ccb19d9e12345172"
+        },
+        {
+          "name": "config_se.json",
+          "size": 3548,
+          "sha256": "fae90047dd3669412abaaee851817faed53e9cdae3f0f50f7558c8d4a61cc7b4"
+        },
+        {
+          "name": "speakers.json",
+          "size": 671018,
+          "sha256": "c97a053a8287e9578a353c8268ac5d8d8a4b469d8bc236b680faafbb85d7017d"
+        },
+        {
+          "name": "language_ids.json",
+          "size": 47,
+          "sha256": "5e0a37a76abc0ac018a43048924b61cf0b82de5879e1ea9a9b24541ce4e45c75"
+        }
+      ]
+    },
+    "xtts_v2": {
+      "name": "XTTS v2",
+      "version": "6c2b0d75eae4b7047358e3b6bd9325f857d43f77",
+      "license": "Coqui Public Model License 1.0",
+      "license_url": "https://huggingface.co/coqui/XTTS-v2/blob/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/LICENSE.txt",
+      "files": [
+        {
+          "name": "config.json",
+          "size": 4368,
+          "sha256": "ef262b1454dd2a77e1461b0b2cd53e19b8a7624cc131b837d36df67356bc75e8",
+          "url": "https://huggingface.co/coqui/XTTS-v2/resolve/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/config.json"
+        },
+        {
+          "name": "model.pth",
+          "size": 1867929118,
+          "sha256": "c7ea20001c6a0a841c77e252d8409f6a74fb423e79b3206a0771ba5989776187",
+          "url": "https://huggingface.co/coqui/XTTS-v2/resolve/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/model.pth"
+        },
+        {
+          "name": "vocab.json",
+          "size": 361219,
+          "sha256": "928260878a59da8a72a2a5b7687fea29d5106137669d90945430fe17e415304a",
+          "url": "https://huggingface.co/coqui/XTTS-v2/resolve/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/vocab.json"
+        },
+        {
+          "name": "speakers_xtts.pth",
+          "size": 7754818,
+          "sha256": "f0f6137c19a4eab0cbbe4c99b5babacf68b1746e50da90807708c10e645b943b",
+          "url": "https://huggingface.co/coqui/XTTS-v2/resolve/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/speakers_xtts.pth"
+        },
+        {
+          "name": "LICENSE.txt",
+          "url": "https://huggingface.co/coqui/XTTS-v2/resolve/6c2b0d75eae4b7047358e3b6bd9325f857d43f77/LICENSE.txt",
+          "size": 4014,
+          "sha256": "190f6d7c19b8984f91b97712b94ce92d2b2e640fc677dacab966e955ece9d043"
+        }
+      ]
+    }
+  }
+}

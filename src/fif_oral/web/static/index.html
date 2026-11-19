@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light"><title>FIF 口语 · WebUI</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css"><script type="module" src="/static/app.js"></script>
+</head>
+<body>
+  <section id="unlock-shell" class="unlock-shell">
+    <div class="unlock-card">
+      <div class="brand">FIF 口语 <span class="edition">WEB</span></div>
+      <div class="eyebrow">本地工作台</div><h1 id="unlock-title">解锁账号库</h1>
+      <p class="muted">管理账号与音色，查看任务并运行自动队列。</p>
+      <form id="unlock-form" class="form-stack">
+        <label>主密码<input id="master-password" type="password" autocomplete="current-password" required></label>
+        <label id="confirmation-label" hidden>再次输入<input id="master-confirmation" type="password" autocomplete="new-password"></label>
+        <p id="unlock-error" class="error" role="alert"></p>
+        <button class="primary" type="submit" id="unlock-button">解锁</button>
+      </form><p class="footnote">账号库保存在运行服务的电脑上。</p>
+    </div>
+  </section>
+  <div id="app-shell" hidden>
+    <header class="topbar">
+      <a class="brand" href="/">FIF 口语 <span class="edition">WEB</span></a>
+      <div class="header-actions"><span id="running-indicator" class="muted"></span>
+        <button id="queue-view" class="quiet">执行队列</button><button id="environment-button" class="quiet">环境与下载</button><button id="settings-button" class="quiet">模型设置</button>
+        <button id="accounts-button" class="quiet">账号与音色</button><button id="lock-button">锁定</button>
+      </div>
+    </header>
+    <div class="workspace">
+      <aside class="panel sidebar">
+        <div class="sidebar-heading"><h2>任务</h2><select id="task-status" aria-label="任务状态"><option value="1">进行中</option><option value="2">已结束</option></select></div>
+        <label class="sr-only" for="account-select">当前账号</label><select id="account-select"></select>
+        <div class="account-line"><span id="account-state" class="muted">未登录</span><button id="login-button" class="text-button">登录</button></div>
+        <label class="sr-only" for="tree-search">筛选任务</label><input id="tree-search" placeholder="筛选已加载节点" type="search">
+        <nav id="task-tree" aria-label="任务目录" class="tree"></nav>
+        <button id="refresh-button" class="quiet refresh">刷新目录</button>
+      </aside>
+      <main id="content" class="panel content" aria-live="polite"></main>
+    </div>
+    <footer><span id="footer-state">本机服务 · 任务进度自动保存</span><span>FIF 口语工作台</span></footer>
+  </div>
+  <div id="context-menu" class="context-menu" role="menu" hidden><button id="context-auto" role="menuitem">全自动完成</button></div>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+  <dialog id="account-dialog" class="wide-dialog">
+    <div class="dialog-heading"><div><div class="eyebrow">工作台设置</div><h2>账号与音色</h2></div><button class="icon-button" data-close aria-label="关闭账号管理">×</button></div>
+    <div class="account-editor"><aside><div id="account-list" class="account-list"></div><button id="new-account" class="full">添加账号</button></aside>
+      <div><form id="account-form" class="form-stack">
+        <label>账号别名<input id="edit-name" maxlength="100" required></label>
+        <label>登录账号<input id="edit-username" maxlength="200" autocomplete="username" required></label>
+        <label>保存密码（可选）<input id="edit-password" type="password" autocomplete="new-password"></label>
+        <label class="check"><input id="clear-password" type="checkbox">清除已保存密码</label>
+        <div class="button-row"><button type="submit" class="primary">保存账号</button><button id="delete-account" type="button" class="danger quiet">移除账号</button></div>
+      </form>
+      <div class="section-heading"><h3>参考音色</h3><span class="muted">PCM WAV · 最大 64 MB</span></div>
+      <div id="voice-list" class="voice-list"></div>
+      <form id="voice-form" class="upload-row"><label class="sr-only" for="voice-file">参考 WAV 文件</label><input id="voice-file" type="file" accept=".wav,audio/wav" required><button type="submit">导入 WAV</button></form>
+      <audio id="voice-player" controls hidden></audio></div>
+    </div><p id="account-error" class="error" role="alert"></p>
+  </dialog>
+
+  <dialog id="login-dialog">
+    <div class="dialog-heading"><div><div class="eyebrow" id="login-account"></div><h2>登录 FIF 口语</h2></div><button class="icon-button" data-close aria-label="关闭登录">×</button></div>
+    <form id="login-form" class="form-stack">
+      <label>登录方式<select id="login-mode"><option value="password">账号密码</option><option value="token">已签发的口语访问令牌</option></select></label>
+      <label id="login-password-label">密码<input id="login-password" type="password" autocomplete="current-password"></label>
+      <label id="login-token-label" hidden>访问令牌<input id="login-token" type="password" autocomplete="off"></label>
+      <div id="captcha-area" hidden><img id="captcha-image" alt="FIF 口语图片验证码"><label>验证码<input id="captcha-answer" autocomplete="off"></label></div>
+      <p id="login-error" class="error" role="alert"></p><button id="login-submit" class="primary" type="submit">登录</button>
+    </form>
+  </dialog>
+
+  <dialog id="environment-dialog" class="wide-dialog">
+    <div class="dialog-heading"><div><div class="eyebrow">首次使用与修复</div><h2>环境与下载</h2></div><button class="icon-button" data-close aria-label="关闭环境与下载">×</button></div>
+    <p class="muted">按需安装到本机数据目录，完成后自动填写路径。CPU TTS 环境独立安装，已有的可用环境会优先复用。</p>
+    <div id="environment-resources"></div>
+    <progress id="environment-progress" class="queue-progress" value="0" max="100" aria-label="安装与下载进度"></progress>
+    <p id="environment-message" class="muted"></p><pre id="environment-logs" class="log-box"></pre>
+    <p class="footnote">模型仅在选择后下载。关闭网页后后台继续；取消后保留部分文件与包缓存，再次准备可继续。模型许可与项目代码许可分别适用。</p>
+    <div class="dialog-actions"><button id="environment-check">重新检测</button><button id="environment-edge-test">Edge 联网合成测试</button><button id="environment-cancel">取消安装</button></div>
+  </dialog>
+  <dialog id="settings-dialog" class="settings-dialog">
+    <div class="dialog-heading"><div><div class="eyebrow">音频生成</div><h2>模型设置</h2></div><button class="icon-button" data-close aria-label="关闭模型设置">×</button></div>
+    <p class="muted">模型单独下载。以下目录与解释器均为运行 Python 服务的电脑上的路径。</p>
+    <form id="settings-form" class="form-grid">
+      <label>语音引擎<select name="backend"><option value="edge">Edge TTS（联网，无需模型）</option><option value="your_tts">YourTTS（本地账号音色）</option><option value="xtts_v2">XTTS v2（本地账号音色）</option></select></label>
+      <label>运行设备<select name="device"><option value="auto">自动</option><option value="cpu">CPU</option><option value="cuda">CUDA</option></select></label>
+      <label class="span-2">TTS Python 解释器<input name="python" placeholder="D:\path\to\tts\python.exe"></label>
+      <label class="span-2">YourTTS 模型目录<input name="your_tts"></label><label class="span-2">XTTS v2 模型目录<input name="xtts_v2"></label>
+      <label>单词生成<select name="word_mode"><option value="model">使用所选引擎</option><option value="system">Windows 美式英语（不使用账号音色）</option></select></label>
+      <label>备用模型<select name="fallback_model"><option value="off">关闭</option><option value="your_tts">YourTTS</option><option value="xtts_v2">XTTS v2</option></select></label>
+      <label>优化目标分数<input name="target_score" type="number" min="0" max="100" required></label><label>每题评测预算<input name="max_trials" type="number" min="1" max="12" required></label>
+      <label>Edge 英文音色<input name="edge_voice" list="edge-voice-options" placeholder="en-US-AriaNeural"><datalist id="edge-voice-options"><option value="en-US-AriaNeural"><option value="en-US-JennyNeural"><option value="en-US-AndrewNeural"><option value="en-US-GuyNeural"></datalist></label>
+      <label>Edge 语速<input name="edge_rate" placeholder="+0%" required></label>
+      <div class="span-2"><button id="refresh-edge-voices" type="button">刷新 Edge 英文音色列表</button></div>
+      <label class="check"><input name="adaptive" type="checkbox">动态调整候选</label><label class="check"><input name="context_mode" type="checkbox">上下文后备（含对齐评测）</label>
+      <label class="span-2">FFmpeg 路径<input name="ffmpeg"></label>
+      <p class="footnote span-2">Edge TTS 会将朗读文本发送到微软在线语音服务，不使用账号参考音色。YourTTS 与 XTTS v2 在本机合成，并使用账号参考 WAV。目标分数用于提前停止优化，不保证得分。</p>
+      <p id="settings-error" class="error span-2" role="alert"></p><div class="dialog-actions span-2"><button type="button" data-close>取消</button><button type="submit" class="primary">保存设置</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

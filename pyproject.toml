@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77,<85"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fif-oral-desktop"
+version = "1.0.0b1"
+description = "FIF 口语客户端，支持桌面与本机 WebUI、多账号和三种语音引擎"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY.md"]
+authors = [{name = "FIF Oral contributors"}]
+dependencies = [
+  "PySide6-Essentials==6.12.0",
+  "PySide6-Addons==6.12.0",
+  "cryptography>=44,<52",
+  "websocket-client>=1.8,<2",
+  "oss2>=2.19,<3",
+  "num2words==0.5.14",
+  "edge-tts==7.3.1",
+]
+
+[project.optional-dependencies]
+web = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1", "python-multipart>=0.0.20,<1", "httpx>=0.28,<1"]
+dev = ["build>=1.2,<2"]
+
+[project.scripts]
+fif-oral = "fif_oral.ui.desktop:main"
+fif-oral-web = "fif_oral.web.cli:main"
+fif-oral-doctor = "fif_oral.environment.doctor:main"
+fif-oral-env = "fif_oral.environment.manager:main"
+
+[project.urls]
+Repository = "https://github.com/Dorouthas/FIF-Desktop"
+Issues = "https://github.com/Dorouthas/FIF-Desktop/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fif_oral = ["resources/*.json", "resources/*.txt", "resources/assets/*.svg", "web/static/*.html", "web/static/*.css", "web/static/*.js", "web/static/*.svg"]
