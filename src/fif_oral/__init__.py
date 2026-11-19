@@ -4,4 +4,4 @@ from importlib.metadata import PackageNotFoundError, version
 try:
     __version__ = version('fif-oral-desktop')
 except PackageNotFoundError:
-    __version__ = '1.0.0b1'
+    __version__ = '1.0.0b2'

@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fif-oral-desktop"
-version = "1.0.0b1"
+version = "1.0.0b2"
 description = "FIF 口语客户端，支持桌面与本机 WebUI、多账号和三种语音引擎"
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
-license = "MIT"
+license = "GPL-3.0-only"
 license-files = ["LICENSE", "THIRD_PARTY.md"]
 authors = [{name = "FIF Oral contributors"}]
 dependencies = [

@@ -42,4 +42,4 @@ jobs:
       - name: Build wheel and source distribution
         run: uv run --no-sync python -m build
       - name: Check public source files
-        run: uv run --no-sync python scripts/package_release.py --version 1.0.0-beta.1 --check-only
+        run: uv run --no-sync python scripts/package_release.py --version 1.0.0-beta.2 --check-only

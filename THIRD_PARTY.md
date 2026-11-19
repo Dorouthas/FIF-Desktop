@@ -1,6 +1,6 @@
 # 来源与第三方组件
 
-本项目源码采用根目录的 MIT 许可。第三方库、在线服务、模型及下载的二进制分别适用其自身条款，项目许可不替代这些条款。
+从 `v1.0.0-beta.2` 起，本项目源码采用根目录的 GNU General Public License version 3（GPL-3.0-only）。第三方库、在线服务、模型及下载的二进制分别适用其自身条款，项目许可不替代这些条款。下方保留参考项目原有的 MIT 版权与许可声明。
 
 - [1z2y3x4w5/fif_gui](https://github.com/1z2y3x4w5/fif_gui)：原项目与行为参考，MIT，Copyright (c) 2025 1z2y3x4w5。朗读文本处理、语音策略的历史行为参考了该项目。
 - [Piggywu981/dsh-fif-oral](https://github.com/Piggywu981/dsh-fif-oral)：参考其轻量 Edge TTS、诊断与发布工作流。该项目声明 MIT；当前 Python 引擎和安装器按本项目接口实现，未导入其浏览器麦克风注入代码。
@@ -11,7 +11,7 @@
 - YourTTS：Coqui 模型索引标为 **CC BY-NC-ND 4.0**，许可见 <https://creativecommons.org/licenses/by-nc-nd/4.0/>。
 - XTTS v2：适用 **Coqui Public Model License**，包括非商业用途限制，许可见 <https://huggingface.co/coqui/XTTS-v2/blob/main/LICENSE.txt>。
 
-自动下载前须确认所选模型许可。本项目源码的 MIT 许可不意味着外部模型及其输出也采用 MIT 或可任意商用。
+自动下载前须确认所选模型许可。本项目源码的 GPL-3.0 许可不意味着外部模型及其输出也采用 GPL-3.0 或可任意商用。
 
 ## 原项目 MIT 声明
 

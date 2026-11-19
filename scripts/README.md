@@ -9,13 +9,13 @@
 先检查待发布文件：
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/package_release.py --version 1.0.0-beta.1 --check-only
+.\.venv\Scripts\python.exe scripts/package_release.py --version 1.0.0-beta.2 --check-only
 ```
 
 运行测试与 JavaScript 语法检查，通过后生成源码包：
 
 ```powershell
-.\.venv\Scripts\python.exe scripts/package_release.py --version 1.0.0-beta.1 --test
+.\.venv\Scripts\python.exe scripts/package_release.py --version 1.0.0-beta.2 --test
 ```
 
 源码包命名为 `fif-oral-<版本号>-source.zip`，与 SHA-256 文件一同保存在 `data/releases/`。脚本拒绝覆盖已有同版本发布包，重新打包时请使用新的版本号。第三方来源与打包时需保留的声明见 [THIRD_PARTY.md](../THIRD_PARTY.md)。
